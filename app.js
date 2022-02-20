@@ -8,18 +8,20 @@ var app = express();
 
 
 // session
-const session = require('express-session');
-app.use(session({
-  secret: 'philosophers',
-  resave: true,
-  saveUninitialized: true,
-  // proxy: true,
-  cookie: {
-    httpOnly: false, 
-    secure: false,
-    maxAge: 30 * 24 * 60 * 1000
-  }
-}));
+// const session = require('express-session');
+// app.use(session({
+//   secret: 'philosophers',
+//   resave: true,
+//   saveUninitialized: true,
+//   // proxy: true,
+//   cookie: {
+//     httpOnly: false, 
+//     secure: false,
+//     maxAge: 30 * 24 * 60 * 1000
+//   }
+// }));
+
+
 // app.set("trust proxy", true);
 // app.use(session({
 //   secret: 'philosophers',
