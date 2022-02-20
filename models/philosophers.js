@@ -71,12 +71,10 @@ module.exports = (sequelize, DataTypes) => {
     //   comment: 'tags'
     // },
     influences: {
-      type: Sequelize.ARRAY(Sequelize.STRING),
-      comment: 'tags'
+      type: Sequelize.ARRAY(Sequelize.STRING)
     },
     influenced: {
-      type: Sequelize.ARRAY(Sequelize.STRING),
-      comment: 'tags'
+      type: Sequelize.ARRAY(Sequelize.STRING)
     },
     createdAt: {
       allowNull: false,
