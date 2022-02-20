@@ -14,10 +14,18 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "mjsdgzioqxbgod",
+    "password": "5ecd2b07084baa5a0bb9452c412d54e1c96dd9e44db32638b1e9ce347e25c834",
+    "database": "d72a6knllgpbj7",
+    "host": "ec2-34-254-69-72.eu-west-1.compute.amazonaws.com",
+    "dialect": "postgres",
+    "ssl": true,
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

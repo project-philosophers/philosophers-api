@@ -8,7 +8,7 @@ var app = express();
 
 
 // session
-const session = require('cookie-session');
+const session = require('express-session');
 app.use(session({
   secret: 'philosophers',
   resave: true,
@@ -53,11 +53,11 @@ app.use('/users', usersRouter);
 
 
 // nuxt
-// const staticFiles = express.static(path.join(__dirname, '../frontend/dist/'));
-// app.use(staticFiles);
+const staticFiles = express.static(path.join(__dirname, '/public'));
+app.use(staticFiles);
 
 // any routes not picked up by the server api will be handled by the nuxt router
-// app.use('/*', staticFiles)
+app.use('/*', staticFiles)
 
 
 
