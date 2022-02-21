@@ -102,6 +102,7 @@ const findPhils = async (req, res, next) => {
 }
 const sendJSON = (req, res, next) => {
 	const phils = res.locals.phils;
+	console.log(phils.map(ph => ph.dataValues));
 	const resJson = {
 		'data': phils.map(ph => ph.dataValues)
 	};
