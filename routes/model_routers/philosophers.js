@@ -93,7 +93,8 @@ const findPhils = async (req, res, next) => {
     // ]
   })
 	.then(phils => {
-		res.locals.phils = phils;
+		// res.locals.phils = phils;
+		res.json(phils);
 	})
 	.catch(err => console.error(err.stack));
 
@@ -108,7 +109,7 @@ const sendJSON = (req, res, next) => {
 	};
 	res.json(resJson);
 }
-router.get('/read', findPhils, sendJSON);
+router.get('/read', findPhils);
 
 // router.get('/read', (req, res) => {
 //   db.Philosophers.findAll({
