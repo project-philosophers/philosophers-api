@@ -92,7 +92,12 @@ router.get('/read', (req, res) => {
     //   { model: db.Keywords, as: "keywords" }
     ]
   })
-    .then(phils => res.json(phils.map(ph => ph.dataValues)))
+    .then(phils => {
+			const resJson = {
+				'data': phils.map(ph => ph.dataValues)
+			};
+			res.json(resJson);
+		})
 		.catch(err => console.error(err.stack));
 });
 
