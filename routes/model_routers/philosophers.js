@@ -82,24 +82,53 @@ router.post('/create', (req, res, next) => {
 // read
 // req: null
 // res: [phils]
-router.get('/read', (req, res) => {
-  db.Philosophers.findAll({
-    include: [
+const findPhils = async (req, res, next) => {
+	const phils = await db.Philosophers.findAll({
+    // include: [
     //   { model: db.Languages, as: "languages" },
     //   { model: db.Nationalities, as: "nationalities" },
     //   { model: db.Education, as: "education" },
     //   { model: db.Categories, as: "categories" },
     //   { model: db.Keywords, as: "keywords" }
-    ]
+    // ]
   })
-    .then(phils => {
-			const resJson = {
-				'data': phils.map(ph => ph.dataValues)
-			};
-			res.json(resJson);
-		})
-		.catch(err => console.error(err.stack));
-});
+	.then(phils => {
+		res.locals.phils = phils;
+	})
+	.catch(err => console.error(err.stack));
+
+	// res.locals.phils = phils;
+	next();
+}
+const sendJSON = (req, res, next) => {
+	const phils = res.locals.phils;
+	const resJson = {
+		'data': phils.map(ph => ph.dataValues)
+	};
+	res.json(resJson);
+}
+router.get('/read', findPhils, sendJSON);
+
+// router.get('/read', (req, res) => {
+//   db.Philosophers.findAll({
+//     include: [
+//     //   { model: db.Languages, as: "languages" },
+//     //   { model: db.Nationalities, as: "nationalities" },
+//     //   { model: db.Education, as: "education" },
+//     //   { model: db.Categories, as: "categories" },
+//     //   { model: db.Keywords, as: "keywords" }
+//     ]
+//   })
+// 	.next()
+// 	.catch(err => console.error(err.stack));
+//     .then(phils => {
+// 			const resJson = {
+// 				'data': phils.map(ph => ph.dataValues)
+// 			};
+// 			res.json(resJson);
+// 		})
+// 		.catch(err => console.error(err.stack));
+// });
 
 
 // update
