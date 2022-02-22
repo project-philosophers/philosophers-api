@@ -36,7 +36,7 @@ module.exports = {
       died_questioning: {
         type: Sequelize.BOOLEAN
       },
-      sex: {
+      gender: {
         type: Sequelize.ENUM('male', 'female', 'other')
       },
       // // language: {
