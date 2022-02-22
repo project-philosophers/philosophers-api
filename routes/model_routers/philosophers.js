@@ -9,9 +9,11 @@ const log = require('../../lib/log');
 
 // check logged in
 router.get('/', (req, res) => {
-  if (!req.session.userinfo) {
-  	res.redirect('/main');
-  }
+  // if (!req.session.userinfo) {
+  // 	res.redirect('/main');
+  // }
+	db.Philosophers.findOne({ where: { name: 'Immanuel Kant' } })
+		.then(ph => res.render('index', {title: ph.name}))
 });
 
 
