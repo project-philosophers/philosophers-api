@@ -10,21 +10,22 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, {
-  host: config.HOST,
+  host: config.host,
   dialect: config.dialect,
-  ssl: true,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
+  ssl: config.ssl,
+  dialectOptions: config.dialectOptions,
   pool: {
-    max: config.pool.max,
-    min: config.pool.min,
-    acquire: config.pool.acquire,
-    idle: config.pool.idle
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
   }
+  // pool: {
+  //   max: config.pool.max,
+  //   min: config.pool.min,
+  //   acquire: config.pool.acquire,
+  //   idle: config.pool.idle
+  // }
 });
 // let sequelize;
 // if (config.use_env_variable) {
