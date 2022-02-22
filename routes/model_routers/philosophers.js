@@ -157,7 +157,9 @@ const sendJSON = (req, res, next) => {
 	const resJson = {
 		'data': phils.map(ph => ph.dataValues)
 	};
-	res.json(resJson);
+	// res.json(resJson);
+	res.render('index', { title: phils[0].name });
+
 }
 router.get('/read', readPhils, sendJSON);
 
