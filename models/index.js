@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
+const singularize  = require('pluralize').singular;
 const env = process.env.NODE_ENV || 'development';
 // const env = 'production';
 const config = require(__dirname + '/../config/config.json')[env];
@@ -14,10 +15,10 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   dialect: config.dialect,
   ssl: config.ssl,
   dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
+    ssl: config.dialectOptions ? {
+      require: config.dialectOptions.require,
+      rejectUnauthorized: config.dialectOptions.rejectUnauthorized
+    } : null
   },
   pool: {
     max: 5,
@@ -49,11 +50,41 @@ fs
     db[model.name] = model;
   });
 
+// tags
+let tags = [];
+fs
+  .readdirSync(__dirname + '/tags')
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname + '/tags', file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+    tags.push(model.name);
+  });
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
+
+
+tags.forEach(tagName => {
+  db.Philosophers.belongsToMany(db[tagName], {
+    through: "phils-" + tagName.toLowerCase(),
+    as: tagName.toLowerCase(),
+    foreignKey: "ph_id",
+    onDelete: "CASCADE"
+  });
+  db[tagName].belongsToMany(db.Philosophers, {
+    through: "phils-" + tagName.toLowerCase(),
+    as: "philosophers",
+    foreignKey: singularize(tagName).toLowerCase() + "_id",
+    onDelete: "CASCADE"
+  });
+})
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
