@@ -39,37 +39,19 @@ module.exports = {
       gender: {
         type: Sequelize.ENUM('male', 'female', 'other')
       },
-      // // language: {
-      // //   type: Sequelize.ARRAY(Sequelize.STRING),
-      // //   comment: 'tags'
-      // // },
-      // nationality: {
-      //   type: Sequelize.ARRAY(Sequelize.STRING),
-      //   comment: 'tags'
-      // },
       birthplace: {
         type: Sequelize.STRING
       },
       deathplace: {
         type: Sequelize.STRING
       },
-      // education: {
-      //   type: Sequelize.ARRAY(Sequelize.STRING),
-      //   comment: 'tags'
-      // },
-      // category: {
-      //   type: Sequelize.ARRAY(Sequelize.STRING),
-      //   comment: 'tags'
-      // },
-      // keywords: {
-      //   type: Sequelize.ARRAY(Sequelize.STRING),
-      //   comment: 'tags'
-      // },
       influences: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        comment: 'tags'
       },
       influenced: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        comment: 'tags'
       },
       createdAt: {
         allowNull: false,
