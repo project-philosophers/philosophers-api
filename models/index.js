@@ -15,11 +15,17 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   dialect: config.dialect,
   ssl: config.ssl,
   dialectOptions: {
-    ssl: config.dialectOptions ? {
-      require: config.dialectOptions.require,
-      rejectUnauthorized: config.dialectOptions.rejectUnauthorized
-    } : null
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
   },
+  // dialectOptions: {
+  //   ssl: config.dialectOptions ? {
+  //     require: config.dialectOptions.require,
+  //     rejectUnauthorized: config.dialectOptions.rejectUnauthorized
+  //   } : null
+  // },
   pool: {
     max: 5,
     min: 0,
